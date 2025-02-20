@@ -2,6 +2,7 @@ import streamlit as st
 import numpy as np
 import pickle
 import sklearn 
+
 # Print scikit-learn version for debugging
 st.write(f"Scikit-learn version: {sklearn.__version__}")
 
@@ -15,13 +16,19 @@ with open("preprocessor.pkl", "rb") as preprocessor_file:
 # Streamlit App
 st.title("Crop Yield Prediction")
 
+# Dropdown options
+areas = ["Area1", "Area2", "Area3", "Area4"]  # Replace with actual area names
+crops = ["Wheat", "Rice", "Maize", "Barley"]  # Replace with actual crop names
+
 # User input fields
 Year = st.number_input("Year", min_value=1900, max_value=2100, step=1)
 average_rain_fall_mm_per_year = st.number_input("Average Rainfall (mm/year)")
 pesticides_tonnes = st.number_input("Pesticides Used (tonnes)")
 avg_temp = st.number_input("Average Temperature (°C)")
-Area = st.text_input("Area Name")
-Item = st.text_input("Crop Name")
+
+# Dropdown selections
+Area = st.selectbox("Select Area Name", areas)
+Item = st.selectbox("Select Crop Name", crops)
 
 # Prediction button
 if st.button("Predict Crop Yield"):
